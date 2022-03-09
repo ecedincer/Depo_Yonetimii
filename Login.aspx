@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="DepoYonetimi.Login" %>
+﻿    <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="DepoYonetimi.Login" %>
 
 <!DOCTYPE html>
 
@@ -45,11 +45,11 @@
                             </div>
                         </div>
 
-                        <div class="input-group mb-3">
+                        <div class="input-group mb-3" >
                             <asp:TextBox runat="server" TextMode="Number" CssClass="form-control" placeholder="Doğrulama kodu" ID="txtdkod"  Visible="false" />
                             <div class="input-group-append">
                                 <div class="input-group-text">
-                                    <span class="fas fa-envelope"></span>
+                                 <asp:Label Text="" runat="server" Visible="false" ><span class="fas fa-envelope"></span></asp:Label>   
                                 </div>
                             </div>
                         </div>
@@ -73,7 +73,6 @@
                         <br />
                         <br />
                         <br />
-
                         
                         <!-- /.social-auth-links -->
 

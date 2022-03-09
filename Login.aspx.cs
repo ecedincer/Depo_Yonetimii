@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Depo_Yonetimi.Sınıflar;
 
 namespace DepoYonetimi
 {
@@ -23,8 +24,6 @@ namespace DepoYonetimi
             string sifre;
             string txtSifree = txtPassword.Text.ToString();
             
-
-
             sifre = db.UserGiris(Email);
 
             if (txtSifree == sifre)
@@ -41,9 +40,6 @@ namespace DepoYonetimi
             {
                 Response.Write("<script>alert('Email/Şifre hatalı tekrar deneyiniz...')</script>");
             }
-
-
-
         }
 
         protected void btnGirisKod_Click(object sender, EventArgs e)

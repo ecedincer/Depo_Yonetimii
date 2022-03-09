@@ -7,9 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
 namespace Depo_Yonetimi
 {
+
+
     public partial class Anasayfa
     {
     }

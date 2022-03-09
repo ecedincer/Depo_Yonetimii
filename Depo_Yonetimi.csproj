@@ -2182,8 +2182,9 @@
     <Compile Include="Anasayfa.aspx.designer.cs">
       <DependentUpon>Anasayfa.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DataBase.cs" />
-    <Compile Include="FA.cs" />
+    <Compile Include="Sınıflar\DataBase.cs" />
+    <Compile Include="Sınıflar\DataBaseDegisken.cs" />
+    <Compile Include="Sınıflar\FA.cs" />
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
