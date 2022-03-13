@@ -156,6 +156,8 @@ namespace Depo_Yonetimi.Sınıflar
 
                     personel.Email = dataReader["Email"].ToString();
                     personel.SehirId = int.Parse(dataReader["SehirId"].ToString());
+                    //personel.DepoID = dataReader["DepoAdi"].ToString();
+                    personel.DepoID = int.Parse(dataReader["DepoID"].ToString());
                     personel.Id = int.Parse(dataReader["PersonellerID"].ToString());
                 }
                 conn.Close();
@@ -185,6 +187,7 @@ namespace Depo_Yonetimi.Sınıflar
                 komut.Parameters.AddWithValue("@IsBasıTarihi", personel.IsBasıTarihi);
                 komut.Parameters.AddWithValue("@IsSonuTarihi", personel.IsSonuTarihi);
                 komut.Parameters.AddWithValue("@Email", personel.Email);
+                komut.Parameters.AddWithValue("@DepoID", personel.DepoID);
 
                 conn.Close();
                 return personel;
@@ -210,6 +213,8 @@ namespace Depo_Yonetimi.Sınıflar
                 komut.Parameters.AddWithValue("@IsBasiTarihi", personel.IsBasıTarihi);
                 komut.Parameters.AddWithValue("@IsSonuTarihi", personel.IsSonuTarihi);
                 komut.Parameters.AddWithValue("@Email", personel.Email);
+                komut.Parameters.AddWithValue("@DepoID", personel.DepoID);
+
 
                 var result = komut.ExecuteNonQuery();
                 conn.Close();
@@ -217,6 +222,31 @@ namespace Depo_Yonetimi.Sınıflar
 
 
         }
+
+        public List<Depo> Depolar()
+        {
+            List<Depo> depolar = new List<Depo>();
+            using (SqlConnection conn = new SqlConnection(connectionStrings))
+            {
+                komut = new SqlCommand("SELECT * FROM Depolar", conn);
+        
+                conn.Open();
+                var dataReader = komut.ExecuteReader();
+           
+                while (dataReader.Read())
+                {
+                    Depo depo = new Depo();
+                    depo.DepoId =int.Parse( dataReader["DepolarID"].ToString());
+                    depo.DepoAdi = dataReader["DepoAdi"].ToString();
+                    depolar.Add(depo);
+
+                }
+                conn.Close();
+                return depolar;
+            }
+        }
+
+
         public void PersonelSil(int personelId)
         {
             using (SqlConnection conn = new SqlConnection(connectionStrings))

@@ -2200,6 +2200,7 @@
     </Compile>
     <Compile Include="Sınıflar\DataBase.cs" />
     <Compile Include="Sınıflar\DataBaseDegisken.cs" />
+    <Compile Include="Sınıflar\Depo.cs" />
     <Compile Include="Sınıflar\FA.cs" />
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

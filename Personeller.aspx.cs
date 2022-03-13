@@ -19,8 +19,19 @@ namespace Depo_Yonetimi
             {
                 db.SehirGetir(drpSehir);
                 db.PersonelGetir(rptPersonel);
+                var depolar = db.Depolar();
+                DoldurDepolar(depolar);
             }
         }
+
+        private void DoldurDepolar(List<Depo> depolar)
+        {
+            drpDepo.DataSource = depolar;
+            drpDepo.DataValueField = nameof(Depo.DepoId);
+            drpDepo.DataTextField = nameof(Depo.DepoAdi);
+            drpDepo.DataBind(); 
+        }
+
         int SehirID;
 
 
@@ -153,6 +164,16 @@ namespace Depo_Yonetimi
         protected void txtpAdres_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void drpDepo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void drpDepo_DataBound(object sender, EventArgs e)
+        {
+            drpSehir.Items.Insert(0, "--Seçiniz--");
         }
         //protected void perPersonelSec_ClickClicked(object sender, EventArgs e)
         //{

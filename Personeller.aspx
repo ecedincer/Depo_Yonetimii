@@ -138,8 +138,16 @@
                         <asp:TextBox runat="server" MaxLength="50" ID="txtMail" />
                     </th>
                 </tr>
+                                <tr>
+                    <th>
+                        <asp:Label Text="Depo :" runat="server" />
+                    </th>
+                    <th>
+                        <asp:DropDownList runat="server" ID="drpDepo" OnSelectedIndexChanged="drpDepo_SelectedIndexChanged" OnDataBound="drpDepo_DataBound">
+                        </asp:DropDownList>
+                    </th>
+                </tr>
                 <tr>
-                    <th></th>
                     <th>
                         <asp:Button Text="Kaydet" runat="server" class="btn btn-outline-dark" ID="btnKaydet" Style="width: 100px;" OnClick="btnKaydet_Click" />
                     </th>
@@ -165,6 +173,7 @@
                     <td>-IseBaslamaTarihi-</td>
                     <td>-IstenAyrilmaTarihi-</td>
                     <td>-Email-</td>
+                    <td>-DepoAdi-</td>
                     <td>-Güncelle-</td>
                     <td>-Sil-</td>
 
@@ -198,7 +207,8 @@
                                 <asp:Label ID="pBitis" Text='<%#Eval("IsSonuTarihi") %>' runat="server" /></td>
                             <td>
                                 <asp:Label ID="pMail" Text='<%#Eval("Email") %>' runat="server" /></td>
-
+                            <td>
+                                <asp:Label ID="Label1" Text='<%#Eval("SehirAdi") %>' runat="server" /></td>
                             <td>
                                 <asp:LinkButton Text="Güncelle" runat="server" ID="PersonelSec" commandname="Update" CommandArgument='<%# Eval("PersonellerID") %>' OnClick="PersonelSec_Click" /></td>
                             <td>

@@ -141,6 +141,15 @@ namespace Depo_Yonetimi
         protected global::System.Web.UI.WebControls.TextBox txtMail;
 
         /// <summary>
+        /// drpDepo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpDepo;
+
+        /// <summary>
         /// btnKaydet control.
         /// </summary>
         /// <remarks>
