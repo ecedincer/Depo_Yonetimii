@@ -69,8 +69,10 @@
   <ItemGroup>
     <Content Include="Anasayfa.aspx" />
     <Content Include="Database\DepoYönetimi.sql" />
+    <Content Include="Depolar.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Musteriler.aspx" />
+    <Content Include="Personeller.aspx" />
     <Content Include="Tasarım\.babelrc.js" />
     <Content Include="Tasarım\.gitattributes" />
     <Content Include="Tasarım\.gitignore" />
@@ -2182,6 +2184,20 @@
     <Compile Include="Anasayfa.aspx.designer.cs">
       <DependentUpon>Anasayfa.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Depolar.aspx.cs">
+      <DependentUpon>Depolar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Depolar.aspx.designer.cs">
+      <DependentUpon>Depolar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Personeller.aspx.cs">
+      <DependentUpon>Personeller.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Personeller.aspx.designer.cs">
+      <DependentUpon>Personeller.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Sınıflar\DataBase.cs" />
     <Compile Include="Sınıflar\DataBaseDegisken.cs" />
     <Compile Include="Sınıflar\FA.cs" />
@@ -2207,6 +2223,7 @@
       <DependentUpon>Musteriler.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sınıflar\Personel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Menu.Master" />

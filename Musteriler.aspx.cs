@@ -30,14 +30,12 @@ namespace Depo_Yonetimi
             db.Ilce_MahGetir(drpIlce, "Ilceler", SehirID);
             drpIlce.SelectedIndex = 0;
             drpMah.SelectedIndex = 0;
-
         }
 
         protected void drpIlce_SelectedIndexChanged(object sender, EventArgs e)
         {
             IlceID= Convert.ToInt32(drpIlce.SelectedValue.ToString());
             db.Ilce_MahGetir(drpMah, "SemtMah", IlceID);
-
         }
 
         protected void drpIlce_DataBound(object sender, EventArgs e)

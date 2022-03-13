@@ -288,6 +288,55 @@
                                     </li>                                   
                                 </ul>
                              </li>
+                              <li class="nav-item">
+                                <a href="Personeller.aspx" class="nav-link">
+                                    <i class="nav-icon fas fa-chart-pie"></i>
+                                    <p>
+                                        Personeller
+               
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="Personeller.aspx" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Personelleri Listele</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="PersonelEkle.aspx" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Personel Ekle/Güncelle</p>
+                                        </a>
+                                    </li>                                   
+                                </ul>
+                             </li>
+                              <li class="nav-item">
+                                <a href="Depolar.aspx" class="nav-link">
+                                    <i class="nav-icon fas fa-chart-pie"></i>
+                                    <p>
+                                        Depolar
+               
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="Depolar.aspx" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Depoları Listele</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="DepoEkle.aspx" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Depo Ekle/Güncelle</p>
+                                        </a>
+                                    </li>                                   
+                                </ul>
+                             </li>
+
 
 
                     </nav>
