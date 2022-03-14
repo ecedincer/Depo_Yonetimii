@@ -13,5 +13,6 @@ namespace Depo_Yonetimi.Sınıflar
         public string Kapasite { get; set; }
         public string Adres { get; set; }
         public int SehirId { get; set; }
+        public int IlceId { get; set; }
     }
 }

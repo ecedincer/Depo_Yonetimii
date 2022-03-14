@@ -33,6 +33,7 @@ namespace Depo_Yonetimi.Sınıflar
         static SqlDataReader dr;
         string sifre;
         static DropDownList ddl = new DropDownList();
+        int personelID;
 
         public string UserGiris(string Email)
         {
@@ -69,7 +70,7 @@ namespace Depo_Yonetimi.Sınıflar
                 ddl.DataTextField = "SehirAdi";
                 ddl.DataBind();
             }
-
+            
         }
 
         public void Ilce_MahGetir(DropDownList ddlmah, string table, int Id)
@@ -113,11 +114,39 @@ namespace Depo_Yonetimi.Sınıflar
                 conn.Close();
             }
         }
-        public void PersonelGetir(Repeater rpt)
+        public void  PersonelGetir(Repeater rpt)
         {
             using (SqlConnection conn = new SqlConnection(connectionStrings))
             {
                 komut = new SqlCommand("spPersonelSelect", conn);
+                conn.Open();
+                rpt.DataSource = komut.ExecuteReader();
+                rpt.DataBind();
+                conn.Close();
+            }
+            
+
+        }
+        public void Getir(Repeater rpt,String a)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionStrings))
+            {
+                komut = new SqlCommand(a.ToString(), conn);
+                conn.Open();
+                rpt.DataSource = komut.ExecuteReader();
+                rpt.DataBind();
+                conn.Close();
+            }
+
+
+
+        }
+
+        public void DepoGetir(Repeater rpt)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionStrings))
+            {
+                komut = new SqlCommand("spDepoSelect", conn);
                 conn.Open();
                 rpt.DataSource = komut.ExecuteReader();
                 rpt.DataBind();
@@ -153,15 +182,36 @@ namespace Depo_Yonetimi.Sınıflar
                     {               
                         personel.IsSonuTarihi = Convert.ToDateTime(dataReader["IsSonuTarihi"].ToString());
                     }
-
                     personel.Email = dataReader["Email"].ToString();
                     personel.SehirId = int.Parse(dataReader["SehirId"].ToString());
-                    //personel.DepoID = dataReader["DepoAdi"].ToString();
-                    personel.DepoID = int.Parse(dataReader["DepoID"].ToString());
+                    personel.DepoAdi = dataReader["DepoAdi"].ToString();
+                    personel.DepoId = Convert.ToInt32(dataReader["DepoID"].ToString());
                     personel.Id = int.Parse(dataReader["PersonellerID"].ToString());
                 }
                 conn.Close();
-                return personel;
+                 return personel;
+            }
+        }
+        public Depo DepoGoster(int depoId)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionStrings))
+            {
+                komut = new SqlCommand("spDepoGetir", conn);
+                komut.CommandType = CommandType.StoredProcedure;
+                komut.Parameters.AddWithValue("@DepolarID", depoId);
+                conn.Open();
+                var dataReader = komut.ExecuteReader();
+                Depo depo = new Depo();
+                while (dataReader.Read())
+                {
+                    depo.DepoAdi = dataReader["DepoAdi"].ToString();
+                    depo.Kapasite = dataReader["Kapasite"].ToString();
+                    depo.DepoTuruID = Convert.ToInt32(dataReader["Adres"].ToString());
+                    depo.Adres = dataReader["Adres"].ToString();
+                    depo.SehirId = int.Parse(dataReader["SehirId"].ToString());
+                }
+                conn.Close();
+                return depo;
             }
         }
         public Personel PersonelGuncelle(Personel personel)
@@ -187,10 +237,32 @@ namespace Depo_Yonetimi.Sınıflar
                 komut.Parameters.AddWithValue("@IsBasıTarihi", personel.IsBasıTarihi);
                 komut.Parameters.AddWithValue("@IsSonuTarihi", personel.IsSonuTarihi);
                 komut.Parameters.AddWithValue("@Email", personel.Email);
-                komut.Parameters.AddWithValue("@DepoID", personel.DepoID);
+                komut.Parameters.AddWithValue("@DepoId", personel.DepoId);
 
                 conn.Close();
                 return personel;
+            }
+        }
+        public Depo DepoGuncelle(Depo depo)
+        {
+
+            using (SqlConnection conn = new SqlConnection(connectionStrings))
+
+            {
+
+                komut = new SqlCommand("spDepoGuncelle ", conn);
+                komut.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+                komut.Parameters.AddWithValue("@DepolarID", depo.DepoId);
+                komut.Parameters.AddWithValue("@DepoAdı", depo.DepoAdi);
+                komut.Parameters.AddWithValue("@DepoTuruID", depo.DepoTuruID);
+                komut.Parameters.AddWithValue("@Kapasite", depo.Kapasite);
+                komut.Parameters.AddWithValue("@Adres", depo.Adres);
+                komut.Parameters.AddWithValue("@SehirID", depo.SehirId);
+                komut.Parameters.AddWithValue("@IlceID", depo.IlceId);
+
+                conn.Close();
+                return depo;
             }
         }
 
@@ -213,10 +285,30 @@ namespace Depo_Yonetimi.Sınıflar
                 komut.Parameters.AddWithValue("@IsBasiTarihi", personel.IsBasıTarihi);
                 komut.Parameters.AddWithValue("@IsSonuTarihi", personel.IsSonuTarihi);
                 komut.Parameters.AddWithValue("@Email", personel.Email);
-                komut.Parameters.AddWithValue("@DepoID", personel.DepoID);
+                komut.Parameters.AddWithValue("@DepoId", personel.DepoId);
 
-
+                
                 var result = komut.ExecuteNonQuery();
+                conn.Close();
+            }
+
+
+        }
+        public void DepoEkle(Depo depo)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionStrings))
+            {
+
+                komut = new SqlCommand("spDepoEkle ", conn);
+                komut.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+                komut.Parameters.AddWithValue("@DepoAdı", depo.DepoAdi);
+                komut.Parameters.AddWithValue("@DepoTuruID", depo.DepoTuruID);
+                komut.Parameters.AddWithValue("@Kapasite", depo.Kapasite);
+                komut.Parameters.AddWithValue("@Adres", depo.Adres);
+                komut.Parameters.AddWithValue("@SehirID", depo.SehirId);
+                komut.Parameters.AddWithValue("@IlceID", depo.IlceId);
+
                 conn.Close();
             }
 
@@ -255,6 +347,21 @@ namespace Depo_Yonetimi.Sınıflar
                 komut.CommandType = System.Data.CommandType.StoredProcedure;
                 conn.Open();
                 komut.Parameters.AddWithValue("@PersonellerID", personelId);
+                var result = komut.ExecuteNonQuery();
+
+                conn.Close();
+            }
+
+
+        }
+        public void DepoSil(int depoId)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionStrings))
+            {
+                komut = new SqlCommand("spDepoSil", conn);
+                komut.CommandType = System.Data.CommandType.StoredProcedure;
+                conn.Open();
+                komut.Parameters.AddWithValue("@ID", depoId);
                 var result = komut.ExecuteNonQuery();
 
                 conn.Close();

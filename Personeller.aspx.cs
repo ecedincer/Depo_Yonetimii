@@ -33,6 +33,7 @@ namespace Depo_Yonetimi
         }
 
         int SehirID;
+        int DepoId;
 
 
         protected void drpSehir_SelectedIndexChanged(object sender, EventArgs e)
@@ -49,6 +50,7 @@ namespace Depo_Yonetimi
         protected void btnKaydet_Click(object sender, EventArgs e)
         {
             Personel personel = new Personel();
+            personel.Id =Convert.ToInt32( txtpID.Text);
             personel.TC = txtpTc.Text;
             personel.Ad = txtpAd.Text;
             personel.Soyad = txtpSoyad.Text;
@@ -64,6 +66,7 @@ namespace Depo_Yonetimi
             personel.SehirId = Convert.ToInt32(drpSehir.SelectedValue);
             personel.Telefon = txtpTelefon.Text;
             personel.IsBasıTarihi = Convert.ToDateTime(txtBaslangic.Text);
+            personel.DepoId = Convert.ToInt32(drpDepo.SelectedValue);
             if (!string.IsNullOrEmpty(txtBitis.Text))
             {
                 personel.IsSonuTarihi = Convert.ToDateTime(txtBitis.Text);
@@ -72,7 +75,7 @@ namespace Depo_Yonetimi
 
             if (txtpID.Text != null && !string.IsNullOrWhiteSpace(txtpID.Text))
             {
-                personel.Id = int.Parse(txtpID.Text);
+                personel.Id =Convert.ToInt32(txtpID.Text);
                 db.PersonelGuncelle(personel);
             }
             else
@@ -81,12 +84,16 @@ namespace Depo_Yonetimi
                 db.PersonelEkle(personel);
 
             }
+            
+
+
             db.PersonelGetir(rptPersonel);
             ClearText();
         }
 
         private void ClearText()
         {
+            txtpID.Text = "";
             txtpTc.Text = "";
             txtpAd.Text = "";
             txtpSoyad.Text = "";
@@ -94,11 +101,14 @@ namespace Depo_Yonetimi
             pCKadin.Checked = false;
             txtpDogumGunu.Text = "";
             txtpAdres.Text = "";
+            txtpUnvan.Text = "";
             txtpTelefon.Text = "";
             txtBaslangic.Text = "";
             txtBitis.Text = "";
             txtMail.Text = "";
             drpSehir.SelectedValue = "--Seçiniz--";
+            drpDepo.SelectedValue = "--Seçiniz--";
+
 
         }
 
@@ -129,6 +139,7 @@ namespace Depo_Yonetimi
                 case "Update":
                     string personelId = e.CommandArgument.ToString();
                     var personel = db.PersonelGoster(int.Parse(personelId));
+                    txtpID.Text = personel.Id.ToString();
                     txtpTc.Text = Convert.ToString(personel.TC);
                     txtpAd.Text = personel.Ad;
                     txtpSoyad.Text = personel.Soyad;
@@ -146,6 +157,8 @@ namespace Depo_Yonetimi
                     if (personel.IsSonuTarihi.HasValue)
                         txtBitis.Text = personel.IsSonuTarihi.Value.ToString("yyyy-MM-dd");
                     txtMail.Text = personel.Email;
+                    drpDepo.SelectedValue = personel.DepoId.ToString();
+
 
                     break;
                 case "Delete":
@@ -168,12 +181,13 @@ namespace Depo_Yonetimi
 
         protected void drpDepo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DepoId = Convert.ToInt32(drpDepo.SelectedValue.ToString());
 
         }
 
         protected void drpDepo_DataBound(object sender, EventArgs e)
         {
-            drpSehir.Items.Insert(0, "--Seçiniz--");
+            drpDepo.Items.Insert(0, "--Seçiniz--");
         }
         //protected void perPersonelSec_ClickClicked(object sender, EventArgs e)
         //{

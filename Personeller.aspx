@@ -19,7 +19,7 @@
                         </div>
                         <div class="form-group">
                             <asp:Label Text="Personel TC : " runat="server" />
-                            <asp:TextBox runat="server" MaxLength="50" ID="txtpTc" />
+                            <asp:TextBox runat="server" MaxLength="11" ID="txtpTc" />
                         </div>
                     </div>
 
@@ -93,7 +93,7 @@
                     </th>
                     <th class="auto-style1">
 
-                        <asp:TextBox runat="server"  MaxLength="10" ID="txtpAdres" OnTextChanged="txtpAdres_TextChanged" />
+                        <asp:TextBox runat="server"  MaxLength="200" ID="txtpAdres" OnTextChanged="txtpAdres_TextChanged" />
                     </th>
                     </tr>
                     <tr>
@@ -208,7 +208,7 @@
                             <td>
                                 <asp:Label ID="pMail" Text='<%#Eval("Email") %>' runat="server" /></td>
                             <td>
-                                <asp:Label ID="Label1" Text='<%#Eval("SehirAdi") %>' runat="server" /></td>
+                                <asp:Label ID="Label1" Text='<%#Eval("DepoAdi") %>' runat="server" /></td>
                             <td>
                                 <asp:LinkButton Text="Güncelle" runat="server" ID="PersonelSec" commandname="Update" CommandArgument='<%# Eval("PersonellerID") %>' OnClick="PersonelSec_Click" /></td>
                             <td>

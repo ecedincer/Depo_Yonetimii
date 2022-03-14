@@ -21,7 +21,8 @@ namespace Depo_Yonetimi.Sınıflar
         public DateTime? IsSonuTarihi { get; set; }
         public string Email { get; set; }
         public int SehirId { get; set; }
-        public int DepoID { get; set; }
-
+        public int DepoId { get; set; }
+        public string DepoAdi { get; set; }
+       
     }
 }
