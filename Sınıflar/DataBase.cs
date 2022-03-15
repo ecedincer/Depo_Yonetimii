@@ -5,6 +5,7 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Data;
 using System.Web.UI.WebControls;
+using Depo_Yonetimi.Sınıflar;
 
 
 namespace Depo_Yonetimi.Sınıflar
@@ -13,7 +14,7 @@ namespace Depo_Yonetimi.Sınıflar
     {
 
 
-        private const string connectionStrings = "Data Source=LAPTOP-53M0RHJS\\OZGUNERBUDAK;Initial Catalog=DepoYonetimi;Trusted_Connection=True";
+        private const string connectionStrings = "Data Source=DESKTOP-0RARGM4\\SQLEXPRESS;Initial Catalog=DepoYonetimi;Trusted_Connection=True";
 
         //static SqlConnection conn = new SqlConnection("Data Source=LAPTOP-53M0RHJS\\OZGUNERBUDAK;Initial Catalog=DepoYonetimi;Trusted_Connection=True");
         //static SqlConnection conn ;
@@ -56,6 +57,36 @@ namespace Depo_Yonetimi.Sınıflar
                 return sifre;
             }
 
+        }
+
+        string ad, soyad;
+        string adSoyad;
+
+        public string User(string Email)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionStrings))
+            {
+                komut = new SqlCommand("sp_LoginAd", conn);
+
+
+
+                dt = new DataTable();
+                conn.Open();
+                komut.CommandType = CommandType.StoredProcedure;
+                komut.Parameters.AddWithValue("@Email", Email);
+                dr = komut.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    ad = dr.GetString(0).ToString();
+                    soyad = dr.GetString(1).ToString();
+                }
+
+                adSoyad = ad + " " + soyad;
+
+                conn.Close();
+                return adSoyad;
+            }
         }
 
         public void SehirGetir(DropDownList ddl)
@@ -324,6 +355,7 @@ namespace Depo_Yonetimi.Sınıflar
         
                 conn.Open();
                 var dataReader = komut.ExecuteReader();
+                
            
                 while (dataReader.Read())
                 {
@@ -331,7 +363,7 @@ namespace Depo_Yonetimi.Sınıflar
                     depo.DepoId =int.Parse( dataReader["DepolarID"].ToString());
                     depo.DepoAdi = dataReader["DepoAdi"].ToString();
                     depolar.Add(depo);
-
+                    
                 }
                 conn.Close();
                 return depolar;
@@ -368,6 +400,75 @@ namespace Depo_Yonetimi.Sınıflar
             }
 
 
+        }
+        
+
+        public  string telno(string MusteriAd)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionStrings)) 
+            {
+                
+                string vs_Select = "SELECT * FROM Musteriler where ";
+                vs_Select += "Kontak='" + MusteriAd + "'";
+                
+                SqlCommand komut = new SqlCommand(vs_Select, conn);
+                conn.Open();
+                SqlDataAdapter oku = new SqlDataAdapter();
+                oku.SelectCommand = komut;
+                DataTable dt = new DataTable();
+                oku.Fill(dt);
+
+                string tel=dt.Rows[0][0].ToString();
+
+                return tel;
+
+                
+
+            }
+        }
+
+        public void MusteriEkle()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionStrings))
+            {
+                
+
+                DataTable tablo = new DataTable();
+                Musteriler dbd = new Musteriler();
+                conn.Open();
+                komut = new SqlCommand("spMusteriEkle", conn);
+                komut.CommandType = CommandType.StoredProcedure;
+                komut.Parameters.AddWithValue("@SirketAdi", dbd.SirketAdi );
+                komut.Parameters.AddWithValue("@Kontak", dbd.Kontak);
+                komut.Parameters.AddWithValue("@Unvan", dbd.Unvan);
+                komut.Parameters.AddWithValue("@Adres", dbd.Adres);
+                komut.Parameters.AddWithValue("@MahalleID", dbd.MahalleID);
+                komut.Parameters.AddWithValue("@Telefon", dbd.Telefon);
+                komut.ExecuteNonQuery();
+                conn.Close();
+                
+            }
+        }
+
+        public string MusteriID()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionStrings))
+            {
+                
+                string sql = "Select top 1 MusteriID from Musteriler order by MusteriID desc";
+                SqlCommand cmd2 = new SqlCommand(sql, conn);
+
+                conn.Open();
+                SqlDataReader sonuc = cmd2.ExecuteReader();
+                while (sonuc.Read())
+                {
+                   string MusteriID = sonuc["MusteriID"].ToString();
+                }
+                conn.Close();
+
+
+                return MusteriID;
+            }
         }
 
     }

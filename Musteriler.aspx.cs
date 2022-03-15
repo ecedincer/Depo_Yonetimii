@@ -14,11 +14,27 @@ namespace Depo_Yonetimi
         DataBase db = new DataBase();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             if (!IsPostBack)
             {
-                db.SehirGetir(drpSehir);
-                db.MusteriGetir(rptMusteri);
+                DataBase db = new DataBase();
+                object admink = Session["Email"];
+
+                string adsoyad;
+
+                adsoyad = db.User((string)admink);
+
+
+                if (admink == null)
+                {
+                    Response.Redirect("Login.aspx");
+                }
+                else
+                {
+                    txtkullanici.Text = adsoyad;
+                    db.SehirGetir(drpSehir);
+                    db.MusteriGetir(rptMusteri);
+                }
             }
 
         }
@@ -68,9 +84,50 @@ namespace Depo_Yonetimi
 
         }
 
+
+        int MusteriID;
         protected void btnKaydet_Click(object sender, EventArgs e)
         {
+            DataBase db= new DataBase();
+            //TEXTBOXLAR BOŞ GEÇİLEMEZ SORGUSU
+            if (string.IsNullOrEmpty(txtmAd.Text) || string.IsNullOrWhiteSpace(txtKontak.Text)
+                && string.IsNullOrEmpty(txtAdres.Text) || string.IsNullOrWhiteSpace(txtTelefon.Text)
+                && string.IsNullOrEmpty(txtUnvan.Text)
+                )
+            {
+                Response.Write("<script>alert('Boş Geçilemez')</script>");
+            }
 
-        }
-    }
-}
+            else
+            {
+                //TELEFON NO 11 HANEDEN KISA OLAMAZ SORGUSU
+                string tel = txtTelefon.Text;
+                if (tel.Length == 11)
+                {
+
+                    int telno = Convert.ToInt32(db.telno(txtUnvan.Text));
+                    //DATABASEDE GİRİLEN TEDARİKCİ İSMİNDE KAYIT VAR MI SORGUSU
+
+                    if (telno > 0)
+                    {
+                        Response.Write("<script>alert('Bu İsimde Veri Kayıtlı')</script>");
+                    }
+                }
+                else
+                {
+                    //TEK BUTTONDA KAYIT YAPTIĞIMIZ İÇİN SEÇİLEN TEDARİKCİNİNS İD Sİ YOK İSE YENİ KAYIT EKLE SORUGUSU
+                    if (string.IsNullOrEmpty(txtmID.Text) || string.IsNullOrWhiteSpace(txtmID.Text))
+                    {
+                        Response.Write("<script>alert('Tedarikci Eklendi')</script>");
+
+                        db.MusteriEkle();
+
+                        MusteriID = Convert.ToInt32(db.MusteriID());
+
+                        txtAdres = "";
+                        txtTelefon.Text = "";
+                        txtmAd.Text = "";
+
+                    }
+                }
+            }

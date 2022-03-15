@@ -8,6 +8,9 @@
                 <table class="table d-sm-table-cell d-sm-table-row table-borderless " style="padding-left: 100px;">
                     <tr>
                         <th>
+                            <asp:TextBox Visible="false" runat="server" ID="txtkullanici"/>
+                        </th>
+                        <th>
                             <asp:Label Text="Müşteri ID : " runat="server" />
                         </th>
                         <th>

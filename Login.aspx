@@ -1,4 +1,4 @@
-﻿    <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="DepoYonetimi.Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Depo_Yonetimi.Login" %>
 
 <!DOCTYPE html>
 
@@ -28,31 +28,41 @@
                         <p class="login-box-msg">Kullanmak için giriş yap !</p>
 
 
+                        
+                        <!--Kullanici Mail -->
                         <div class="input-group mb-3">
-                            <asp:TextBox runat="server" TextMode="Email" CssClass="form-control" placeholder="Email" ID="txtEmail"  />
+                            <asp:TextBox ID="txtEmail" TextMode="Email" placeholder="Kullanıcı Mail Giriniz..." CssClass="form-control" runat="server" type="text" MaxLength="50"></asp:TextBox>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator9" ControlToValidate="txtEmail" runat="server" Display="Static"
+                                ErrorMessage="Sadece Harf Giriniz." EnableClientScript="False" ForeColor="red" ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" ValidationGroup="ButtonClck">
+                            </asp:RegularExpressionValidator>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>
                                 </div>
                             </div>
                         </div>
+                        <!--Kullanici Mail END-->
+                        
+                        <!--Kullanici Pass-->
                         <div class="input-group mb-3">
-                            <asp:TextBox runat="server" TextMode="Password" CssClass="form-control" placeholder="Password" ID="txtPassword" />
+                            <asp:TextBox ID="txtPassword" placeholder="Kullanıcı Şifre Giriniz..." CssClass="form-control" runat="server" type="text" MaxLength="50" Visible="true" TextMode="Password"></asp:TextBox>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="input-group mb-3" >
-                            <asp:TextBox runat="server" TextMode="Number" CssClass="form-control" placeholder="Doğrulama kodu" ID="txtdkod"  Visible="false" />
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                 <asp:Label Text="" runat="server" Visible="false" ><span class="fas fa-envelope"></span></asp:Label>   
-                                </div>
-                            </div>
+                        <!--Kullanici Pass END-->
+                        
+                        <!--KOD ONAY-->
+                        <div class="input-group mb-3">
+                            <asp:TextBox ID="txtdkod" CssClass="form-control" placeholder="Onay Kodunu Giriniz..." runat="server" type="text" MaxLength="50" Visible="false" ValidationGroup="OnayClck"></asp:TextBox>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtdkod" runat="server" Display="Static"
+                                ErrorMessage="Sadece Rakam Giriniz." EnableClientScript="False" ForeColor="red" ValidationExpression="^\d+$" ValidationGroup="OnayClck">
+                            </asp:RegularExpressionValidator>
                         </div>
+                        <!--KOD ONAY END-->
+
 
                            
 

@@ -73,6 +73,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Musteriler.aspx" />
     <Content Include="Personeller.aspx" />
+    <Content Include="Resim\depo-yonetimi_9317298356_-1x-1_false_false.jpg" />
     <Content Include="Tasarım\.babelrc.js" />
     <Content Include="Tasarım\.gitattributes" />
     <Content Include="Tasarım\.gitignore" />
@@ -2191,6 +2192,13 @@
     <Compile Include="Depolar.aspx.designer.cs">
       <DependentUpon>Depolar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Personeller.aspx.cs">
       <DependentUpon>Personeller.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2202,13 +2210,6 @@
     <Compile Include="Sınıflar\DataBaseDegisken.cs" />
     <Compile Include="Sınıflar\Depo.cs" />
     <Compile Include="Sınıflar\FA.cs" />
-    <Compile Include="Login.aspx.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Menu.Master.cs">
       <DependentUpon>Menu.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
